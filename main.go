@@ -98,6 +98,8 @@ func main() {
 	sites := os.Args[1:]
 	for _, site := range sites {
 		forbidden[site+"."] = 1
+		forbidden["www."+site+"."] = 1
+		forbidden["gateway."+site+"."] = 1
 	}
 
 	originalResolConf, err := backupAndModifyDNSSettings()
