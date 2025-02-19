@@ -33,7 +33,7 @@ miniDNS is a lightweight local DNS server written in Go that allows you to block
 
 ### Using the Pre-Built Binary
 
-1. Download the pre-built `miniDNS` binary from the [GitHub Releases](https://github.com/yourusername/miniDNS/releases) page.
+1. Download the pre-built `miniDNS` binary from the [GitHub Releases](https://github.com/lucastomic/miniDNS/releases) page.
 
 2. Place the binary in your desired directory.
 
@@ -115,7 +115,7 @@ sudo ./miniDNS example.com test.com
 ## Contributing
 
 Contributions, issues, and feature requests are welcome!
-Feel free to check [Issues](https://github.com/yourusername/miniDNS/issues) and [Pull Requests](https://github.com/yourusername/miniDNS/pulls).
+Feel free to check [Issues](https://github.com/lucastomic/miniDNS/issues) and [Pull Requests](https://github.com/lucastomic/miniDNS/pulls).
 
 ---
 
