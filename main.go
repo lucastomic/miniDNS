@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -13,7 +14,7 @@ import (
 )
 
 var forbidden = map[string]any{
-	"www.example.com.": 1,
+	"example.com.": 1,
 }
 
 func handleDNSRequest(w dns.ResponseWriter, r *dns.Msg) {
@@ -21,10 +22,10 @@ func handleDNSRequest(w dns.ResponseWriter, r *dns.Msg) {
 	m.SetReply(r)
 
 	for _, q := range r.Question {
-		domain := q.Name
-		fmt.Println("[DNS] Received query for:", domain)
-
-		if _, found := forbidden[domain]; found {
+		host := q.Name
+		fmt.Println("[DNS] Received query for:", host)
+		domainAndTLD := strings.Join(strings.Split(host, ".")[1:], ".")
+		if _, found := forbidden[domainAndTLD]; found {
 			fmt.Println("[DNS] Refusing connection")
 			m.Rcode = dns.RcodeRefused
 			w.WriteMsg(m)
@@ -92,14 +93,12 @@ func restoreDNSSettings(backup string) {
 
 func main() {
 	if len(os.Args) < 2 {
-		log.Fatalf("[CONFIG] No sites provided. Usage: %s <site1> <site2> ...", "forbidden")
+		log.Fatalf("[CONFIG] No sites provided. Usage: %s <site1> <site2> ...", "miniDNS")
 	}
 
 	sites := os.Args[1:]
 	for _, site := range sites {
 		forbidden[site+"."] = 1
-		forbidden["www."+site+"."] = 1
-		forbidden["gateway."+site+"."] = 1
 	}
 
 	originalResolConf, err := backupAndModifyDNSSettings()

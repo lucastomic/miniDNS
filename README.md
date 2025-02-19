@@ -81,9 +81,6 @@ To run miniDNS, provide one or more sites (without `http://` or trailing `.`) as
 sudo ./miniDNS example.com test.com
 ```
 
-> **Note:**
-> The program automatically appends the `.` and also creates entries for `www.` and `gateway.` prefixed versions of the domain to ensure comprehensive blocking.
-
 ### What Happens When You Run miniDNS
 
 1. **Backup DNS Settings:**
